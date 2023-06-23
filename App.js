@@ -1,5 +1,7 @@
 import User from './screens/User'; 
 import Enroll from './screens/Enroll'; 
+import Participate from './screens/Participate'; 
+import RoomDetail from './screens/RoomDetail.js'; 
 import React, { useEffect, useState } from 'react';
 import { StatusBar, StyleSheet, Text, Button, View, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -40,6 +42,8 @@ const HomeScreen = ({ navigation }) => {
         <View style={style} key={room.roomId}>
           <Text>roomId: {room.roomId} hostID: {room.hostId.userId}</Text>
           <Text>{room.start} -- {room.destination}</Text>
+          <Button title="Go To participate" onPress={() => navigation.navigate('Participate')}/>
+          <Button title="details" onPress={() => navigation.navigate('RoomDetail', { roomId: room.roomId})}/>
         </View>
       ))}
       {/* <Button
@@ -62,6 +66,8 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="User" component={User} />
+        <Stack.Screen name="Participate" component={Participate} />
+        <Stack.Screen name="RoomDetail" component={RoomDetail} />
         <Stack.Screen name="Enroll" component={Enroll} />
       </Stack.Navigator>
     </NavigationContainer>
