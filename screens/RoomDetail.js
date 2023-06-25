@@ -7,14 +7,14 @@ export default function App() {
   const roomId = route.params.roomId;
 
   //자기 집 주소 넣으시면 될듯!
-  const  IP = "192.168.0.2";
+  const  IP = "192.168.219.101";
 
   const [room, setRoom] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://"+IP`:8080/room/${roomId}`);
+        const response = await fetch(`http://${IP}:8080/room/${roomId}`);
         const json = await response.json();
         setRoom(json);
       } catch (error) {

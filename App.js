@@ -15,16 +15,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const HomeScreen = ({ navigation }) => {
-
-  //자기 집 주소 넣으시면 될듯!
-  const  IP = "192.168.0.2";
+  // 자기 집 주소 넣으시면 될듯!
+  const IP = '192.168.219.101';
 
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://"+IP+":8080/room/list");
+        const response = await fetch('http://' + IP + ':8080/room/list');
         const json = await response.json();
 
         // 객체를 배열로 변환
@@ -48,38 +47,38 @@ const HomeScreen = ({ navigation }) => {
   }
 
   return (
-    <ScrollView style={styles.container}>
-      {data.map((room) => (
-        <View style={styles.roomContainer} key={room.roomId}>
-          <Text style={styles.roomId}>
-            roomId: {room.roomId} hostID: {room.hostId.userId}
-          </Text>
-          <Text style={styles.roomInfo}>
-            {room.start} -- {room.destination}
-          </Text>
-          <View style={styles.buttonContainer}>
-            <Button
-              title="Go To participate"
-              onPress={() => navigation.navigate('Participate')}
-            />
-            <Button
-              title="Details"
-              onPress={() =>
-                navigation.navigate('RoomDetail', { roomId: room.roomId })
-              }
-            />
+    <View style={styles.container}>
+      <ScrollView>
+        {data.map((room) => (
+          <View style={styles.roomContainer} key={room.roomId}>
+            <Text style={styles.roomId}>
+              roomId: {room.roomId} hostID: {room.hostId.userId}
+            </Text>
+            <Text style={styles.roomInfo}>
+              {room.start} -- {room.destination}
+            </Text>
+            <View style={styles.buttonContainer}>
+              <Button
+                title="Go To participate"
+                onPress={() => navigation.navigate('Participate', { roomId: room.roomId } )}
+              />
+              <Button
+                title="Details"
+                onPress={() =>
+                  navigation.navigate('RoomDetail', { roomId: room.roomId })
+                }
+              />
+            </View>
           </View>
-        </View>
-      ))}
-      {/* <Button
-        title="Go to User"
-        onPress={() => navigation.navigate('User')}
-      /> */}
-      <Button
-        title="Go to Enroll"
-        onPress={() => navigation.navigate('Enroll')}
-      />
-    </ScrollView>
+        ))}
+      </ScrollView>
+      <View style={styles.enrollButtonContainer}>
+        <Button
+          title="Go to Enroll"
+          onPress={() => navigation.navigate('Enroll')}
+        />
+      </View>
+    </View>
   );
 };
 
@@ -124,5 +123,12 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+  },
+  enrollButtonContainer: {
+    position: 'absolute',
+    bottom: 20,
+    left: 0,
+    right: 0,
+    paddingHorizontal: 20,
   },
 });

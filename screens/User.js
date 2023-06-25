@@ -4,7 +4,7 @@ import { Text, View } from 'react-native';
 export default function App() {
 
   //자기 집 주소 넣으시면 될듯!
-  const  IP = "192.168.0.2";
+  const  IP = "192.168.219.101";
 
   const [data, setData] = useState([]);
   useEffect(() => {
