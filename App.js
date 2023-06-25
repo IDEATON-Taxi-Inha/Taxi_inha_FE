@@ -14,15 +14,15 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
 const HomeScreen = ({ navigation }) => {
   // 자기 집 주소 넣으시면 될듯!
-  const IP = '192.168.219.101';
+  const IP = '192.168.0.2';
 
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
+      
       try {
         const response = await fetch('http://' + IP + ':8080/room/list');
         const json = await response.json();
@@ -48,12 +48,13 @@ const HomeScreen = ({ navigation }) => {
   }
 
   const handleParticipate = (roomId) => {
+    console.log(roomId);
     Alert.alert(
       'Participate',
       '참가하시겠습니까?',
     [
       { text: 'Cancel', style: 'cancel' },
-      { text: 'OK', onPress: () => navigation.navigate('Participate', { roomId }) },
+      { text: 'OK', onPress: () => navigation.navigate('Participate', { paramRoomId:roomId }) },
     ]
     );
     
