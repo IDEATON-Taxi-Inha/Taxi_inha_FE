@@ -1,9 +1,16 @@
-import User from './screens/User'; 
-import Enroll from './screens/Enroll'; 
-import Participate from './screens/Participate'; 
-import RoomDetail from './screens/RoomDetail.js'; 
+import User from './screens/User';
+import Enroll from './screens/Enroll';
+import Participate from './screens/Participate';
+import RoomDetail from './screens/RoomDetail.js';
 import React, { useEffect, useState } from 'react';
-import { StatusBar, StyleSheet, Text, Button, View, ScrollView } from 'react-native';
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  Button,
+  View,
+  ScrollView,
+} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -13,7 +20,7 @@ const HomeScreen = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://192.168.219.104:8080/room/list');
+        const response = await fetch('http://192.168.219.101:8080/room/list');
         const json = await response.json();
 
         // 객체를 배열로 변환
@@ -30,20 +37,34 @@ const HomeScreen = ({ navigation }) => {
 
   if (data.length === 0) {
     return (
-      <View>
+      <View style={styles.container}>
         <Text>Loading...</Text>
       </View>
     );
   }
 
   return (
-    <View style={style}>
+    <ScrollView style={styles.container}>
       {data.map((room) => (
-        <View style={style} key={room.roomId}>
-          <Text>roomId: {room.roomId} hostID: {room.hostId.userId}</Text>
-          <Text>{room.start} -- {room.destination}</Text>
-          <Button title="Go To participate" onPress={() => navigation.navigate('Participate')}/>
-          <Button title="details" onPress={() => navigation.navigate('RoomDetail', { roomId: room.roomId})}/>
+        <View style={styles.roomContainer} key={room.roomId}>
+          <Text style={styles.roomId}>
+            roomId: {room.roomId} hostID: {room.hostId.userId}
+          </Text>
+          <Text style={styles.roomInfo}>
+            {room.start} -- {room.destination}
+          </Text>
+          <View style={styles.buttonContainer}>
+            <Button
+              title="Go To participate"
+              onPress={() => navigation.navigate('Participate')}
+            />
+            <Button
+              title="Details"
+              onPress={() =>
+                navigation.navigate('RoomDetail', { roomId: room.roomId })
+              }
+            />
+          </View>
         </View>
       ))}
       {/* <Button
@@ -51,10 +72,10 @@ const HomeScreen = ({ navigation }) => {
         onPress={() => navigation.navigate('User')}
       /> */}
       <Button
-        title="Go to enroll"
+        title="Go to Enroll"
         onPress={() => navigation.navigate('Enroll')}
       />
-    </View>
+    </ScrollView>
   );
 };
 
@@ -75,27 +96,29 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  btn: {
+  container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+    padding: 20,
+  },
+  roomContainer: {
+    marginBottom: 20,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#eee',
+    borderRadius: 5,
+  },
+  roomId: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  roomInfo: {
+    fontSize: 14,
+    marginBottom: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 });
-
-const style = StyleSheet.create({
-    container: {
-      flex:1,
-      backgroundColor : '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    item: {
-      flex: 1,
-      alignSelf: 'stretch',
-      margin: 10,
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderBottomWidth: 1,
-      borderBottomColor: '#eee'
-    }
-  });

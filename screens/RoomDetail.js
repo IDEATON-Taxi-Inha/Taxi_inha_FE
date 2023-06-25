@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View,TextInput,Button } from 'react-native';
+import { Text, View, TextInput, Button, StyleSheet } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
-
 export default function App() {
-    const route = useRoute();
-    const roomId = route.params.roomId;
+  const route = useRoute();
+  const roomId = route.params.roomId;
 
   const [room, setRoom] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://192.168.219.104:8080/room/${roomId}`);
+        const response = await fetch(`http://192.168.219.101:8080/room/${roomId}`);
         const json = await response.json();
         setRoom(json);
       } catch (error) {
@@ -25,44 +24,48 @@ export default function App() {
 
   if (!room) {
     return (
-      <View>
-        <Text>Loading...</Text>
+      <View style={styles.container}>
+        <Text style={styles.loadingText}>Loading...</Text>
       </View>
     );
   }
 
   return (
-    <View>
-    {
-      <View key ={room.roomId} >
-          <Text >{room.roomId}   </Text>
-          <Text >{room.hostId.userId} {room.hostId.nickname} {room.hostId.gender} {room.maxNum}  {room.status}  {room.start} {room.destination} </Text>
-          <Text >{room.maxNum}  {room.status}  {room.start} {room.destination} </Text>
-          {/* <Text >{room.maxNum-room.participant.size()} </Text> */}
-          <View >
-          </View>
+    <View style={styles.container}>
+      <View key={room.roomId} style={styles.roomContainer}>
+        <Text style={styles.roomId}>{room.roomId} {room.status}</Text>
+        {/* <Text style={styles.infoText}>{`${room.hostId.userId} ${room.hostId.nickname} ${room.hostId.gender}`}</Text>  */}
+        <Text style={styles.infoText}>{`${room.maxNum}  ${room.start} ${room.destination}`}</Text>
+        {/* {room.participants.map(participant => (
+          <Text key={participant.participant_id} style={styles.participantText}>{`${participant.user_id.userId} ${participant.user_id.nickname} ${participant.user_id.gender}`}</Text>
+        ))} */}
       </View>
-    }
     </View>
   );
 }
 
-
-
-  // const style = StyleSheet.create({
-  //   container: {
-  //     flex:1,
-  //     backgroundColor : '#fff',
-  //     alignItems: 'center',
-  //     justifyContent: 'center',
-  //   },
-  //   item: {
-  //     flex: 1,
-  //     alignSelf: 'stretch',
-  //     margin: 10,
-  //     alignItems: 'center',
-  //     justifyContent: 'center',
-  //     borderBottomWidth: 1,
-  //     borderBottomColor: '#eee'
-  //   }
-  // });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  roomContainer: {
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 10,
+    marginVertical: 10,
+  },
+  roomId: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  infoText: {
+    fontSize: 16,
+  },
+});
