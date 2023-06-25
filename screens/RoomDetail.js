@@ -7,7 +7,7 @@ export default function App() {
   const roomId = route.params.roomId;
 
   //자기 집 주소 넣으시면 될듯!
-  const  IP = "192.168.219.101";
+  const  IP = "192.168.0.2";
 
   const [room, setRoom] = useState([]);
 
