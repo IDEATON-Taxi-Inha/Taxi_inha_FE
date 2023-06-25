@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Button,Text, TextInput, View, StyleSheet } from 'react-native';
+import { Button,Text, TextInput, View, StyleSheet,Alert } from 'react-native';
 
-export default function App() {
-  const [maxnum, setMaxNum] = useState('');
-  const [start, setStart] = useState('');
-  const [destination, setDestination] = useState('');
+export default function App({ route, navigation }) {
+  
+  const { paramRoomId } = route.params;
 
   const sendData = async () => {
 
@@ -12,13 +11,12 @@ export default function App() {
     const  IP = "192.168.219.101";
 
     const data = {
-      maxnum: parseInt(maxnum),
-      start: start,
-      destination: destination,
+      roomid: parseInt(paramRoomId),
+      
     };
 
     try {
-      const response = await fetch("http://"+IP+":8080/room/create", {
+      const response = await fetch("http://"+IP+":8080/participate/create", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,30 +35,24 @@ export default function App() {
     }
   };
 
+
   return (
-    <View style={styles.container}>
-      
-      <TextInput
-        style={styles.input}
-        placeholder="Start"
-        value={start}
-        onChangeText={setStart}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Destination"
-        value={destination}
-        onChangeText={setDestination}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Max Number of Participants"
-        value={maxnum}
-        onChangeText={setMaxNum}
-        keyboardType="numeric"
-      />
-      <Button title="Send Data" onPress={sendData} />
-    </View>
+    
+    Alert.alert(
+      '참가 완료!',
+      '',
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            navigation.goBack();
+          },
+        },
+      ],
+      { 
+        cancelable: false 
+      }
+    )
   );
 }
 
@@ -70,11 +62,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 20,
   },
-  input: {
-    marginBottom: 10,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
   },
 });

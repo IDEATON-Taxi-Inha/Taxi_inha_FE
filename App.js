@@ -10,6 +10,7 @@ import {
   Button,
   View,
   ScrollView,
+  Alert,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -46,6 +47,18 @@ const HomeScreen = ({ navigation }) => {
     );
   }
 
+  const handleParticipate = (roomId) => {
+    Alert.alert(
+      'Participate',
+      '참가하시겠습니까?',
+    [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'OK', onPress: () => navigation.navigate('Participate', { roomId }) },
+    ]
+    );
+    
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -60,7 +73,8 @@ const HomeScreen = ({ navigation }) => {
             <View style={styles.buttonContainer}>
               <Button
                 title="Go To participate"
-                onPress={() => navigation.navigate('Participate', { roomId: room.roomId } )}
+                // onPress={() => navigation.navigate('Participate', { roomId: room.roomId } )}
+                onPress={() => handleParticipate(room.roomId)}
               />
               <Button
                 title="Details"
