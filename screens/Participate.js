@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import { Button, TextInput } from 'react-native';
 
 export default function App() {
+
+  //자기 집 주소 넣으시면 될듯!
+  const  IP = "192.168.0.2";
   
   const [maxNum, setMaxNum] = useState('');
   const [start, setStart] = useState('');
@@ -16,7 +19,7 @@ export default function App() {
     };
 
     try {
-      const response = await fetch('http://192.168.219.101:8080/room/create', {
+      const response = await fetch("http://"+IP+":8080/room/create", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

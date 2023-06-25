@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 
 export default function App() {
+
+  //자기 집 주소 넣으시면 될듯!
+  const  IP = "192.168.0.2";
+
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://192.168.219.101:8080/user/list');
+        const response = await fetch("http://"+IP+":8080/user/list");
         const json = await response.json();
         setData(json);
       } catch (error) {

@@ -15,12 +15,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const HomeScreen = ({ navigation }) => {
+
+  //자기 집 주소 넣으시면 될듯!
+  const  IP = "192.168.0.2";
+
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://192.168.219.101:8080/room/list');
+        const response = await fetch("http://"+IP+":8080/room/list");
         const json = await response.json();
 
         // 객체를 배열로 변환
