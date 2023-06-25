@@ -60,22 +60,27 @@ import React, { useState } from 'react';
 import { Button, TextInput, View, StyleSheet } from 'react-native';
 
 export default function App() {
-  const [maxNum, setMaxNum] = useState('');
+  const [maxnum, setMaxNum] = useState('');
   const [start, setStart] = useState('');
   const [destination, setDestination] = useState('');
 
   const sendData = async () => {
+
+    //자기 집 주소 넣으시면 될듯!
+    const  IP = "192.168.0.2";
+
     const data = {
-      maxNum: parseInt(maxNum),
+      maxnum: parseInt(maxnum),
       start: start,
       destination: destination,
     };
 
     try {
-      const response = await fetch('http://192.168.219.101:8080/room/create', {
+      const response = await fetch("http://"+IP+":8080/room/create", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'hostid' : 1,
         },
         body: JSON.stringify(data),
       });
@@ -83,7 +88,7 @@ export default function App() {
       if (response.ok) {
         console.log('Data sent successfully!');
       } else {
-        console.log('Failed to send data:', response.status);
+        console.log('Failed to send data:', respnse.status);
       }
     } catch (error) {
       console.error('Error sending data:', error);
@@ -107,7 +112,7 @@ export default function App() {
       <TextInput
         style={styles.input}
         placeholder="Max Number of Participants"
-        value={maxNum}
+        value={maxnum}
         onChangeText={setMaxNum}
         keyboardType="numeric"
       />
