@@ -13,17 +13,18 @@ export default function App({ route, navigation}) {
     };
 
     try {
+      const userid = await AsyncStorage.getItem("userid");
       const response = await fetch("http://"+IP+":8080/participant/create", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'userid' : AsyncStorage.getItem("userid"),
+          'userid' : userid,
           'roomid' : paramRoomId,
         },
         body: JSON.stringify(data),
       });
 
-        console.log(data);
+        console.log(userid);
       if (response.ok) {
         console.log('Data sent successfully!');
       } else {
