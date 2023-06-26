@@ -11,7 +11,7 @@ const LoginScreen = ({navigation}) => {
         const keys = await AsyncStorage.getItem("userid");
         console.log(keys);
         Alert.alert(
-            '참가 완료!',
+            '로그인 완료!',
             '',
             [
               {

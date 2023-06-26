@@ -20,11 +20,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const HomeScreen = ({ navigation }) => {
 
+
+
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      
+
       try {
         const response = await fetch('http://' + IP + ':8080/room/list');
         const json = await response.json();
@@ -63,23 +65,24 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Text>{}</Text>
       <ScrollView>
         {data.map((room) => (
           <View style={styles.roomContainer} key={room.roomId}>
             <Text style={styles.roomId}>
-              roomId: {room.roomId} hostID: {room.hostId.userId}
+              roomId: {room.roomId} ---------- 모임장: {room.hostId.nickname}
             </Text>
             <Text style={styles.roomInfo}>
-              {room.start} -- {room.destination}
+              {room.start} ------> {room.destination}
             </Text>
             <View style={styles.buttonContainer}>
               <Button
-                title="Go To participate"
+                title="참가하기"
                 // onPress={() => navigation.navigate('Participate', { roomId: room.roomId } )}
                 onPress={() => handleParticipate(room.roomId)}
               />
               <Button
-                title="Details"
+                title="모임 세부사항"
                 onPress={() =>
                   navigation.navigate('RoomDetail', { roomId: room.roomId })
                 }
@@ -90,7 +93,7 @@ const HomeScreen = ({ navigation }) => {
       </ScrollView>
       <View style={styles.enrollButtonContainer}>
         <Button
-          title="Go to Enroll"
+          title="모임 등록하기"
           onPress={() => navigation.navigate('Enroll')}
         />
         <Button
