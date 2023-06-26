@@ -73,7 +73,7 @@ const HomeScreen = ({ navigation }) => {
               roomId: {room.roomId} ---------- 모임장: {room.hostId.nickname}
             </Text>
             <Text style={styles.roomInfo}>
-              {room.start} ------> {room.destination}
+              {room.start} ------ {room.destination}
             </Text>
             <View style={styles.buttonContainer}>
               <Button

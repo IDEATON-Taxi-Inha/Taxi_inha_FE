@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Button, TextInput, View, StyleSheet } from 'react-native';
+import { Button, TextInput, View,Alert, StyleSheet } from 'react-native';
 import { IP } from "../config"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function App() {
+export default function App({navigation}) {
   const [maxnum, setMaxNum] = useState('');
   const [start, setStart] = useState('');
   const [destination, setDestination] = useState('');
@@ -30,9 +30,25 @@ export default function App() {
       console.log(data);
       if (response.ok) {
         console.log('Data sent successfully!');
+        Alert.alert(
+          '등록 완료!',
+          '',
+          [
+            {
+              text: 'OK',
+              onPress: () => {
+                navigation.goBack();
+              },
+            },
+          ],
+          { 
+            cancelable: false 
+          }
+        )
       } else {
         console.log('Failed to send data:', response.status);
       }
+
     } catch (error) {
       console.error('Error sending data:', error);
     }
