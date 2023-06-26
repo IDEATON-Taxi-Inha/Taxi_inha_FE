@@ -2,6 +2,7 @@ import User from './screens/User';
 import Enroll from './screens/Enroll';
 import Participate from './screens/Participate';
 import RoomDetail from './screens/RoomDetail.js';
+import Login from './screens/Login.js'
 import React, { useEffect, useState } from 'react';
 import {
   StatusBar,
@@ -92,6 +93,10 @@ const HomeScreen = ({ navigation }) => {;
           title="Go to Enroll"
           onPress={() => navigation.navigate('Enroll')}
         />
+        <Button
+            title="Login"
+            onPress={() => navigation.navigate('Login')}
+        />
       </View>
     </View>
   );
@@ -108,6 +113,7 @@ export default function App() {
         <Stack.Screen name="Participate" component={Participate} />
         <Stack.Screen name="RoomDetail" component={RoomDetail} />
         <Stack.Screen name="Enroll" component={Enroll} />
+        <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
   );
