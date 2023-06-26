@@ -31,7 +31,6 @@ const HomeScreen = ({ navigation }) => {
 
         // 객체를 배열로 변환
         const dataArray = Object.values(json);
-
         setData(dataArray);
       } catch (error) {
         console.error('Error fetching data:', error);
