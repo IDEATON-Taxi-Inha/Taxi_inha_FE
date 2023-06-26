@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Button, TextInput, View, StyleSheet } from 'react-native';
+import { IP } from "../config"
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
   const [maxnum, setMaxNum] = useState('');
@@ -9,8 +11,6 @@ export default function App() {
   const sendData = async () => {
 
     //자기 집 주소 넣으시면 될듯!
-    const  IP = "192.168.0.2";
-
     const data = {
       maxnum: parseInt(maxnum),
       start: start,
@@ -22,7 +22,7 @@ export default function App() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'hostid' : 1,
+          'hostid' : AsyncStorage.getItem("userid"),
         },
         body: JSON.stringify(data),
       });

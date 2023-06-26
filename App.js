@@ -2,6 +2,7 @@ import User from './screens/User';
 import Enroll from './screens/Enroll';
 import Participate from './screens/Participate';
 import RoomDetail from './screens/RoomDetail.js';
+import Login from './screens/Login.js'
 import React, { useEffect, useState } from 'react';
 import {
   StatusBar,
@@ -14,9 +15,10 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { IP } from "./config"
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const HomeScreen = ({ navigation }) => {
-  // 자기 집 주소 넣으시면 될듯!
-  const IP = '192.168.0.2';
 
   const [data, setData] = useState([]);
 
@@ -48,7 +50,7 @@ const HomeScreen = ({ navigation }) => {
   }
 
   const handleParticipate = (roomId) => {
-    console.log(roomId);
+
     Alert.alert(
       'Participate',
       '참가하시겠습니까?',
@@ -92,6 +94,10 @@ const HomeScreen = ({ navigation }) => {
           title="Go to Enroll"
           onPress={() => navigation.navigate('Enroll')}
         />
+        <Button
+            title="Login"
+            onPress={() => navigation.navigate('Login')}
+        />
       </View>
     </View>
   );
@@ -108,6 +114,7 @@ export default function App() {
         <Stack.Screen name="Participate" component={Participate} />
         <Stack.Screen name="RoomDetail" component={RoomDetail} />
         <Stack.Screen name="Enroll" component={Enroll} />
+        <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
   );
