@@ -12,9 +12,9 @@ export default function App() {
 
     //자기 집 주소 넣으시면 될듯!
     const data = {
-      maxnum: parseInt(maxnum),
-      start: start,
-      destination: destination,
+      maxnum : parseInt(maxnum),
+      start : start,
+      destination : destination,
     };
 
     try {
@@ -30,7 +30,7 @@ export default function App() {
       if (response.ok) {
         console.log('Data sent successfully!');
       } else {
-        console.log('Failed to send data:', respnse.status);
+        console.log('Failed to send data:', response.status);
       }
     } catch (error) {
       console.error('Error sending data:', error);

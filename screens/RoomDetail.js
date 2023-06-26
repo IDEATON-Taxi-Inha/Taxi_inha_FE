@@ -20,7 +20,6 @@ export default function App() {
         // 객체를 배열로 변환
         const dataArray = Object.values(json.participants);
         setData(dataArray);
-        
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -31,30 +30,27 @@ export default function App() {
 
   if (!room) {
     return (
-      <View style={styles.container}>
-        <Text style={styles.loadingText}>Loading...</Text>
-      </View>
+        <View style={styles.container}>
+          <Text style={styles.loadingText}>Loading...</Text>
+        </View>
     );
   }
 
   return (
-    <View style={styles.container}>
-      <View key={room.roomId} style={styles.roomContainer}>
-        <Text style={styles.roomId}>{room.roomId} {room.status}</Text>
-        {/* <Text style={styles.infoText}>{`${room.hostId.userId} ${room.hostId.nickname} ${room.hostId.gender}`}</Text>  */}
-        <Text style={styles.infoText}>{`${room.maxNum}  ${room.start} ${room.destination}`}</Text>
-        
-
-      {data.map((participant, index) => (
-            <View key={index}>
-              <Text style={styles.infoText}>{`Participant ID: ${participant.participant_id}`}</Text>
-              <Text style={styles.infoText}>{`User ID: ${participant.user_id.userId}`}</Text>
-              <Text style={styles.infoText}>{`Nickname: ${participant.user_id.nickname}`}</Text>
-              <Text style={styles.infoText}>{`Gender: ${participant.user_id.gender}`}</Text>
-            </View>
+      <View style={styles.container}>
+        <View key={room.roomId} style={styles.roomContainer}>
+          <Text style={styles.roomId}>모집중</Text>
+          <Text></Text>
+          {/* <Text style={styles.infoText}>{`${room.hostId.userId} ${room.hostId.nickname} ${room.hostId.gender}`}</Text> */}
+          <Text style={styles.infoText}>{`정원 : ${room.maxnum} / 출발 : ${room.start} / 도착 : ${room.destination}`}</Text>
+          {data.map((participant, index) => (
+              <View key={index} style={styles.participantContainer}>
+                <Text style={styles.infoText}>{`이름 : ${participant.user_id.nickname}`}</Text>
+                <Text style={styles.infoText}>{`성별 : ${participant.user_id.gender}`}</Text>
+              </View>
           ))}
+        </View>
       </View>
-    </View>
   );
 }
 
@@ -81,5 +77,12 @@ const styles = StyleSheet.create({
   },
   infoText: {
     fontSize: 16,
+  },
+  participantContainer: {
+    marginVertical: 10,
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 5,
+    backgroundColor: '#f0f0f0',
   },
 });

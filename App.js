@@ -111,7 +111,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="택시인下" component={HomeScreen} />
         <Stack.Screen name="User" component={User} />
         <Stack.Screen name="Participate" component={Participate} />
         <Stack.Screen name="RoomDetail" component={RoomDetail} />
