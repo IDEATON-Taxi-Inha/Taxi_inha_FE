@@ -16,8 +16,9 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { IP } from "./config"
-const HomeScreen = ({ navigation }) => {;
-  console.log(IP)
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const HomeScreen = ({ navigation }) => {
 
   const [data, setData] = useState([]);
 
@@ -49,7 +50,7 @@ const HomeScreen = ({ navigation }) => {;
   }
 
   const handleParticipate = (roomId) => {
-    console.log(roomId);
+
     Alert.alert(
       'Participate',
       '참가하시겠습니까?',

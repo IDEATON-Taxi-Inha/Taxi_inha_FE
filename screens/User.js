@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import { IP } from "../config"
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 export default function App() {
   
 

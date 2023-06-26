@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Button, TextInput, View, StyleSheet } from 'react-native';
 import { IP } from "../config"
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 export default function App() {
   const [maxnum, setMaxNum] = useState('');
   const [start, setStart] = useState('');
@@ -20,7 +22,7 @@ export default function App() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'hostid' : 1,
+          'hostid' : AsyncStorage.getItem("userid"),
         },
         body: JSON.stringify(data),
       });

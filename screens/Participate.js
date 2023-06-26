@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button,Text, TextInput, View, StyleSheet,Alert } from 'react-native';
 import { IP } from "../config"
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App({ route, navigation}) {
 
@@ -16,7 +17,7 @@ export default function App({ route, navigation}) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'userid' : 1,
+          'userid' : AsyncStorage.getItem("userid"),
           'roomid' : paramRoomId,
         },
         body: JSON.stringify(data),

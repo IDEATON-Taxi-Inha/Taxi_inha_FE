@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, TextInput, Button, StyleSheet } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { IP } from "../config"
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
   const route = useRoute();
