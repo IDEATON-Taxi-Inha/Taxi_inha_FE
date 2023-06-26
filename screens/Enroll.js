@@ -18,15 +18,16 @@ export default function App() {
     };
 
     try {
+      const host  = await AsyncStorage.getItem("userid");
       const response = await fetch("http://"+IP+":8080/room/create", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'hostid' : AsyncStorage.getItem("userid"),
+          'hostid' : host,
         },
         body: JSON.stringify(data),
       });
-
+      console.log(data);
       if (response.ok) {
         console.log('Data sent successfully!');
       } else {
