@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Alert, StyleSheet } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -10,6 +10,22 @@ const LoginScreen = () => {
         AsyncStorage.setItem('userid',username);
         const keys = await AsyncStorage.getItem("userid");
         console.log(keys);
+        Alert.alert(
+            '참가 완료!',
+            '',
+            [
+              {
+                text: 'OK',
+                onPress: () => {
+                  navigation.goBack();
+                },
+              },
+            ],
+            { 
+              cancelable: false 
+            }
+          )
+        
     }
 
     return (
@@ -20,13 +36,7 @@ const LoginScreen = () => {
                 value={username}
                 onChangeText={setUsername}
             />
-            <TextInput
-                style={styles.input}
-                placeholder="비밀번호"
-                secureTextEntry
-                value={password}
-                onChangeText={setPassword}
-            />
+        
             <Button title="로그인" onPress={handleLogin} />
         </View>
     );

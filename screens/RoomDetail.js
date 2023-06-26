@@ -18,7 +18,7 @@ export default function App() {
         const json = await response.json();
         setRoom(json);
         // 객체를 배열로 변환
-        const dataArray = Object.values(room.participants);
+        const dataArray = Object.values(json.participants);
         setData(dataArray);
         
       } catch (error) {
