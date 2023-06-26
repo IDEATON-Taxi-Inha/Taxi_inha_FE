@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, TextInput, View, StyleSheet } from 'react-native';
-
+import { IP } from "../config"
 export default function App() {
   const [maxnum, setMaxNum] = useState('');
   const [start, setStart] = useState('');
@@ -9,8 +9,6 @@ export default function App() {
   const sendData = async () => {
 
     //자기 집 주소 넣으시면 될듯!
-    const  IP = "192.168.0.2";
-
     const data = {
       maxnum: parseInt(maxnum),
       start: start,

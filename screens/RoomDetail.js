@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, TextInput, Button, StyleSheet } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { IP } from "../config"
 
 export default function App() {
   const route = useRoute();
   const roomId = route.params.roomId;
 
-  //자기 집 주소 넣으시면 될듯!
-  const  IP = "192.168.0.2";
 
   const [room, setRoom] = useState([]);
 

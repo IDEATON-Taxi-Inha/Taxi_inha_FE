@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import { Button,Text, TextInput, View, StyleSheet,Alert } from 'react-native';
+import { IP } from "../config"
 
 export default function App({ route, navigation}) {
 
   const paramRoomId = route.params.paramRoomId;
   const sendData = async () => {
 
-    //자기 집 주소 넣으시면 될듯!
-    //192.168.0.2
-    const  IP = "192.168.0.2";
 
     const data = {
-      roomid: parseInt(paramRoomId),
     };
 
     try {
@@ -19,7 +16,8 @@ export default function App({ route, navigation}) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'hostid' : 1,
+          'userid' : 1,
+          'roomid' : paramRoomId,
         },
         body: JSON.stringify(data),
       });

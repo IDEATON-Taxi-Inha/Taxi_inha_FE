@@ -14,9 +14,9 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-const HomeScreen = ({ navigation }) => {
-  // 자기 집 주소 넣으시면 될듯!
-  const IP = '192.168.0.2';
+import { IP } from "./config"
+const HomeScreen = ({ navigation }) => {;
+  console.log(IP)
 
   const [data, setData] = useState([]);
 
